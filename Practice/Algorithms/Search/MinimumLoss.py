@@ -8,15 +8,27 @@ import sys
 
 
 # Complete the minimumLoss function below.
-def minimumLoss(price):
-    years = len(price)
-    diff = []
-    for i in range(0, years - 1, 1):
-        for j in range(i + 1, years, 1):
-            if price[i] >= price[j]:
-                diff.append(price[i] - price[j])
+def minimumLoss(p):
+    sprice = sorted(price, reverse=True)
+    diffList = []
 
-    ans = min(diff)
+    for i in range(len(sprice) - 1):
+        diffList.append(sprice[i] - sprice[i + 1])
+    print(diffList)
+
+    sdiffList = sorted(diffList)
+    print(sdiffList)
+
+    if min(sdiffList) == max(sdiffList):
+        ans = min(sdiffList)
+    else:
+        for item in sdiffList:
+            pos1 = diffList.index(item)
+            print(pos1)
+            print(price.index(sprice[pos1]), price.index(sprice[pos1 + 1]))
+            if price.index(sprice[pos1]) < price.index(sprice[pos1 + 1]):
+                ans = item
+                break
 
     return ans
 
